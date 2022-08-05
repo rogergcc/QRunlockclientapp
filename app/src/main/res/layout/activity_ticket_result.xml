@@ -105,6 +105,7 @@
 
                 <TextView
                     android:id="@+id/duration"
+                    android:text="2022/08/01"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
@@ -128,7 +129,7 @@
 
                 <TextView
                     android:id="@+id/genre"
-                    android:text=""
+                    android:text="08:30pm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
@@ -159,11 +160,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_v"
+                    android:text="@string/lbl_zone"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView
                     android:id="@+id/rating"
+                    android:text="VIP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
@@ -182,11 +184,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_price"
+                    android:text="@string/lbl_name"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView
-                    android:id="@+id/price"
+                    android:id="@+id/tvName"
+                    android:text="Roger"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-condensed"
