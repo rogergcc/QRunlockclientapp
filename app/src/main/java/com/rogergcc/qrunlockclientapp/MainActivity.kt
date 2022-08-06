@@ -7,9 +7,12 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.huawei.hms.ml.scan.HmsScan
 import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
+import com.rogergcc.qrunlockclientapp.helper.SoundPoolPlayer
+import com.rogergcc.qrunlockclientapp.helper.TimberAppLogger
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     val DEFINED_CODE = 222
     private val REQUEST_CODE_SCAN = 0X01
-    //private var mSoundPoolPlayer: SoundPoolPlayer? = null
+    private var mSoundPoolPlayer: SoundPoolPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,15 +49,17 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //receive result after your activity finished scanning
         super.onActivityResult(requestCode, resultCode, data)
-        //AppLogger.e("onActivityResult")
+        TimberAppLogger.e("onActivityResult")
         if (resultCode != RESULT_OK || data == null) {
             return
         }
         if (requestCode == REQUEST_CODE_SCAN) {
             val hmsScan: HmsScan? = data.getParcelableExtra(QrScanActivity.SCAN_RESULT)
-            if (hmsScan != null && !TextUtils.isEmpty(hmsScan.getOriginalValue())) {
+            if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
+                mSoundPoolPlayer?.playShortResource(R.raw.bleep)
+                var tipoDato = ""
+                Toast.makeText(this, "Data=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
 
-//
             }
         }
     }
