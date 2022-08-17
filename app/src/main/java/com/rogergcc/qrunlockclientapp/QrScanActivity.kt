@@ -22,12 +22,6 @@ class QrScanActivity : AppCompatActivity() {
     //declare RemoteView instance
     private lateinit var remoteView: RemoteView
 
-    var mScreenWidth = 0
-    var mScreenHeight = 0
-
-    //scan_view_finder width & height is  300dp
-    val SCAN_FRAME_SIZE = 300
-
 
     private lateinit var binding: ActivityQrScanBinding
 
@@ -44,7 +38,7 @@ class QrScanActivity : AppCompatActivity() {
 
 
 //        binding.ani.bringToFront();
-        binding!!.animationView.setAnimation("qrcode_scanner.json")
+        binding.animationView.setAnimation("qrcode_scanner.json")
 //        binding.animationView.setScale(.7f);
         //        binding.animationView.setScale(.7f);
         binding.animationView.setRenderMode(RenderMode.HARDWARE)
@@ -176,7 +170,12 @@ class QrScanActivity : AppCompatActivity() {
 
     companion object {
         //declare the key ,used to get the value returned from scankit
-        val SCAN_RESULT = "scanResult"
-        private val TAG = "QrScanActivity2"
+        const val SCAN_RESULT = "scanResult"
+        private const val TAG = "QrScanActivity2"
+
+        //scan_view_finder width & height is  300dp
+        const val SCAN_FRAME_SIZE = 300
+        var mScreenHeight = 0
+        var mScreenWidth = 0
     }
 }

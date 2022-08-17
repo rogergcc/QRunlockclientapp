@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-       binding.btnScan.setOnClickListener( View.OnClickListener {
-           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-               requestPermissions(
-                   arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
-                   DEFINED_CODE
-               )
-           }
-       })
+        binding.btnScan.setOnClickListener(View.OnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(
+                    arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
+                    DEFINED_CODE
+                )
+            }
+        })
     }
 
 
@@ -63,13 +63,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions!!, grantResults!!)
-        if (permissions == null || grantResults == null || grantResults.size < 2 || grantResults[0] != PackageManager.PERMISSION_GRANTED || grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults.size < 2 ||
+            grantResults[0] != PackageManager.PERMISSION_GRANTED
+            || grantResults[1] != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
         if (requestCode == DEFINED_CODE) {
