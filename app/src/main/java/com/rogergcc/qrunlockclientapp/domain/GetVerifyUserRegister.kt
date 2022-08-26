@@ -1,15 +1,15 @@
 package com.rogergcc.qrunlockclientapp.domain
 
 import com.rogergcc.qrunlockclientapp.domain.model.AttendanceDomain
-import com.rogergcc.qrunlockclientapp.data.TheMovieDBRepository
+import com.rogergcc.qrunlockclientapp.data.TheAttendaceRepository
 import javax.inject.Inject
 
 
-class GetVerifyUserRegister @Inject constructor(private val repository: TheMovieDBRepository){
+class GetVerifyUserRegister @Inject constructor(private val repository: TheAttendaceRepository){
 
     suspend operator fun invoke(): List<AttendanceDomain>{
-        val movies = repository.getPopularMoviesFromApi()
-        return movies
+        val attendaceUser = repository.getAttendaceData()
+        return attendaceUser
 //        if(movies.isNotEmpty()){
 //            repository.clearMovies()
 //            return movies

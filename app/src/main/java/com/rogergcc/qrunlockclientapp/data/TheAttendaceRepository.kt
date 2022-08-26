@@ -6,10 +6,10 @@ import com.rogergcc.qrunlockclientapp.domain.model.AttendanceDomain
 import com.rogergcc.qrunlockclientapp.domain.model.toDomain
 import javax.inject.Inject
 
-class TheMovieDBRepository @Inject constructor(
+class TheAttendaceRepository @Inject constructor(
     private val apiClient: QrEventClient
 ) {
-    suspend fun getPopularMoviesFromApi(): List<AttendanceDomain> {
+    suspend fun getAttendaceData(): List<AttendanceDomain> {
         val response = apiClient.getUserAttendanaceDetails()
         response.toString()
         return response.map { it.toDomain() }

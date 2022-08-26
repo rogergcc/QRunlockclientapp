@@ -11,20 +11,20 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(
+class AttendaceViewModel @Inject constructor(
     private val getVerifyUserRegister: GetVerifyUserRegister
 ) : ViewModel() {
 
 
     val isLoading = MutableLiveData<Boolean>()
-    val popularMovies = MutableLiveData<List<AttendanceDomain>>()
+    val attendaceData = MutableLiveData<List<AttendanceDomain>>()
 
     fun onCreate(){
         viewModelScope.launch {
             isLoading.postValue(true)
             val result = getVerifyUserRegister()
             if(!result.isNullOrEmpty()){
-                popularMovies.postValue(result)
+                attendaceData.postValue(result)
                 isLoading.postValue(false)
             }
         }
