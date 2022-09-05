@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class QrEventClient @Inject constructor(private val api: QrEventsApi) {
 
-    suspend fun getUserAttendanaceDetails(): List<AttedancesRows> {
+    suspend fun verifyRegisterUserAttendace(): List<AttedancesRows> {
            return try{
                 val response = api.getVerifyUserAttendance()
                 response.body()?.body?.attedancesRows ?: emptyList()
