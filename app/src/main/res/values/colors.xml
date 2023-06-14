@@ -18,4 +18,10 @@
     <color name="btn_disabled">#999</color>
     <color name="lbl_value">#222222</color>
 
+
+    <color name="quickie_gray">#dadce0</color>
+    <color name="quickie_white">#ffffff</color>
+    <color name="quickie_transparent">#00000000</color>
+    <color name="quickie_accent_fallback">#03dac5</color>
+
 </resources>
