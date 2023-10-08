@@ -11,4 +11,5 @@
     <dimen name="dimen_value_20">18sp</dimen>
     <dimen name="dimen_title">22sp</dimen>
     <dimen name="dimen_button">20sp</dimen>
+    <dimen name="scan_frame_size">300dp</dimen>
 </resources>

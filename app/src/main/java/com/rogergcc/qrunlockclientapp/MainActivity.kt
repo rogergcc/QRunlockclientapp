@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    val DEFINED_CODE = 222
-    private val REQUEST_CODE_SCAN = 0X01
     private var mSoundPoolPlayer: SoundPoolPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
                     arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
-                    DEFINED_CODE
+                    Companion.DEFINED_CODE
                 )
             }
         })
@@ -53,12 +51,19 @@ class MainActivity : AppCompatActivity() {
         if (resultCode != RESULT_OK || data == null) {
             return
         }
-        if (requestCode == REQUEST_CODE_SCAN) {
+        if (requestCode == Companion.REQUEST_CODE_SCAN) {
             val hmsScan: HmsScan? = data.getParcelableExtra(QrScanActivity.SCAN_RESULT)
             if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
                 mSoundPoolPlayer?.playShortResource(R.raw.bleep)
                 var tipoDato = ""
                 Toast.makeText(this, "Data=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
+
+                TimberAppLogger.e("ScanResult ${hmsScan?.getScanType()}")
+                TimberAppLogger.e("ScanResult ${hmsScan?.scanType}")
+                TimberAppLogger.e("OriginalValue ${hmsScan?.originalValue} ")
+                TimberAppLogger.e("showResult ${hmsScan?.showResult} ")
+                TimberAppLogger.e("emailContent ${hmsScan?.emailContent} ")
+
 
             }
         }
@@ -76,14 +81,19 @@ class MainActivity : AppCompatActivity() {
         ) {
             return
         }
-        if (requestCode == DEFINED_CODE) {
+        if (requestCode == Companion.DEFINED_CODE) {
             //start your activity for scanning barcode
-            //mSoundPoolPlayer = SoundPoolPlayer(this)
+            mSoundPoolPlayer = SoundPoolPlayer(this)
             this.startActivityForResult(
                 Intent(this, QrScanActivity::class.java),
-                REQUEST_CODE_SCAN
+                Companion.REQUEST_CODE_SCAN
             )
         }
+    }
+
+    companion object {
+        private const val DEFINED_CODE = 222
+        private const val REQUEST_CODE_SCAN = 0X01
     }
 
 
