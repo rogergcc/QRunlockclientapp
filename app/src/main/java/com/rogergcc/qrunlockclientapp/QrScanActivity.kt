@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -154,11 +155,16 @@ class QrScanActivity : AppCompatActivity() {
                 !TextUtils.isEmpty(result[0].getOriginalValue())
             ) {
                 TimberAppLogger.e("OriginalValue QRSC ${result[0].originalValue} ")
+                Toast.makeText(
+                    this@QrScanActivity,
+                    result[0].getOriginalValue(),
+                    Toast.LENGTH_SHORT
+                ).show()
 
-                val intent = Intent()
-                intent.putExtra(SCAN_RESULT, result[0])
-                setResult(RESULT_OK, intent)
-                finish()
+//                val intent = Intent()
+//                intent.putExtra(SCAN_RESULT, result[0])
+//                setResult(RESULT_OK, intent)
+//                finish()
             }
         }
 
