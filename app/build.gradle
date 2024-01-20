@@ -20,10 +20,25 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+            versionNameSuffix "_Debug"
+            applicationIdSuffix ".debug"
+            resValue "string", "app_name_build", "[D] Qr Unlock Event"
+            buildConfigField 'String', 'BACKGROUND_COLOR', '"#FF018786"'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
         release {
-            minifyEnabled false
+//            applicationIdSuffix ".mlkitsolmobile1720"
+//            signingConfig signingConfigs.release
+            debuggable false
+            resValue "string", "app_name_build", "Qr Unlock Event"
+            buildConfigField 'String', 'BACKGROUND_COLOR', '"#6d0094"'
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

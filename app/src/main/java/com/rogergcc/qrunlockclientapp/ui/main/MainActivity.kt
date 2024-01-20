@@ -3,6 +3,8 @@ package com.rogergcc.qrunlockclientapp.ui.main
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.huawei.hms.ml.scan.HmsScan
+import com.rogergcc.qrunlockclientapp.BuildConfig
 import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanActivity
 import com.rogergcc.qrunlockclientapp.R
 import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
@@ -32,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+
+        binding.constraintParent.backgroundTintList = ColorStateList.valueOf(Color.parseColor(BuildConfig.BACKGROUND_COLOR))
         binding.btnScan.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
