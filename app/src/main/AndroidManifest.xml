@@ -9,14 +9,14 @@
 
     <application
         android:allowBackup="true"
-        android:name=".MyApp"
+        android:name=".ui.BaseApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRunlockclientapp">
         <activity
-            android:name=".QrScanActivity"
+            android:name=".ui.scanner.QrScanActivity"
             android:exported="false"
 
             android:theme="@style/FullScreen" />
@@ -24,7 +24,7 @@
             android:name=".TicketResultActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

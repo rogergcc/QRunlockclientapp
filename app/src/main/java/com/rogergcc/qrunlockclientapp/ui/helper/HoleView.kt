@@ -1,4 +1,4 @@
-package com.rogergcc.qrunlockclientapp.helper
+package com.rogergcc.qrunlockclientapp.ui.helper
 
 
 /**
@@ -31,7 +31,6 @@ class HoleView : View {
         init(context, attrs, defStyleAttr, 0)
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(
         context: Context,
         attrs: AttributeSet?,

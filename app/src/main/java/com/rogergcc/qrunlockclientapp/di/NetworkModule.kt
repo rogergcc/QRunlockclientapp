@@ -19,17 +19,14 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient{
-
         return OkHttpClient.Builder()
             .addInterceptor(QrEventInterceptor())
             .build()
     }
 
-
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-
         return Retrofit.Builder()
             .baseUrl(Constantes.TMDBAPI_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

@@ -1,4 +1,4 @@
-package com.rogergcc.qrunlockclientapp
+package com.rogergcc.qrunlockclientapp.ui.main
 
 import android.Manifest
 import android.content.Intent
@@ -10,9 +10,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.huawei.hms.ml.scan.HmsScan
+import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanActivity
+import com.rogergcc.qrunlockclientapp.R
 import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
-import com.rogergcc.qrunlockclientapp.helper.SoundPoolPlayer
-import com.rogergcc.qrunlockclientapp.helper.TimberAppLogger
+import com.rogergcc.qrunlockclientapp.ui.helper.SoundPoolPlayer
+import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-
-        //        setContentView(R.layout.activity_main_list_qr_codes);
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
@@ -33,14 +32,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        binding.btnScan.setOnClickListener(View.OnClickListener {
+        binding.btnScan.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
                     arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
-                    Companion.DEFINED_CODE
+                    DEFINED_CODE
                 )
             }
-        })
+        }
     }
 
 
@@ -51,11 +50,10 @@ class MainActivity : AppCompatActivity() {
         if (resultCode != RESULT_OK || data == null) {
             return
         }
-        if (requestCode == Companion.REQUEST_CODE_SCAN) {
+        if (requestCode == REQUEST_CODE_SCAN) {
             val hmsScan: HmsScan? = data.getParcelableExtra(QrScanActivity.SCAN_RESULT)
             if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
                 mSoundPoolPlayer?.playShortResource(R.raw.bleep)
-                var tipoDato = ""
                 Toast.makeText(this, "Data=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
 
                 TimberAppLogger.e("ScanResult ${hmsScan?.getScanType()}")
@@ -72,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.size < 2 ||
@@ -81,12 +79,12 @@ class MainActivity : AppCompatActivity() {
         ) {
             return
         }
-        if (requestCode == Companion.DEFINED_CODE) {
+        if (requestCode == DEFINED_CODE) {
             //start your activity for scanning barcode
             mSoundPoolPlayer = SoundPoolPlayer(this)
             this.startActivityForResult(
                 Intent(this, QrScanActivity::class.java),
-                Companion.REQUEST_CODE_SCAN
+                REQUEST_CODE_SCAN
             )
         }
     }

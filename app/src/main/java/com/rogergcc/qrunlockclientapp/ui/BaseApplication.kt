@@ -1,14 +1,14 @@
-package com.rogergcc.qrunlockclientapp
+package com.rogergcc.qrunlockclientapp.ui
 
 import android.app.Application
-import com.rogergcc.qrunlockclientapp.helper.TimberAppLogger
+import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
 
 
 /**
  * Created on junio.
  * year 2023 .
  */
-class MyApp : Application() {
+class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

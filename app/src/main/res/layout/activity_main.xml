@@ -6,21 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
 
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearContainer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_margin"
+        android:layout_marginEnd="@dimen/activity_margin"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,32 +26,32 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:clickable="true"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_baseline_qr_code_24"
-            android:focusable="true" />
+            android:contentDescription="@string/image_description"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_qr_code_24" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-light"
             android:gravity="center"
+            android:textStyle="bold"
+            android:lineSpacingExtra="4sp"
+            android:letterSpacing="0.03"
             android:text="@string/scan_the_qr_code"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <Button
         android:id="@+id/btnScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginBottom="32dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-medium"
-        android:foreground="?attr/selectableItemBackground"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/scan_qr_code"

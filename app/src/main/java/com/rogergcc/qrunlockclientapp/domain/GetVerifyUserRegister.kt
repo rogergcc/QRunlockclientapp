@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetVerifyUserRegister @Inject constructor(private val repository: TheAttendanceRepository){
 
     suspend operator fun invoke(): List<AttendanceDomain>{
-        val attendaceUser = repository.getAttendaceData()
+        val attendaceUser = repository.getAttendanceData()
         return attendaceUser
 //        if(movies.isNotEmpty()){
 //            repository.clearMovies()

@@ -1,4 +1,4 @@
-package com.rogergcc.qrunlockclientapp
+package com.rogergcc.qrunlockclientapp.ui.scanner
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,8 +16,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.airbnb.lottie.RenderMode
 import com.huawei.hms.hmsscankit.RemoteView
 import com.huawei.hms.ml.scan.HmsScan
+import com.rogergcc.qrunlockclientapp.R
 import com.rogergcc.qrunlockclientapp.databinding.ActivityQrScanBinding
-import com.rogergcc.qrunlockclientapp.helper.TimberAppLogger
+import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
 
 
 class QrScanActivity : AppCompatActivity() {
@@ -109,16 +110,13 @@ class QrScanActivity : AppCompatActivity() {
         setupEdgeToEdgeUI()
 
 
-        animation()
+        setUptAnimation()
 
-
-        //1.get screen density to caculate viewfinder's rect
 
 
         //1.get screen density to caculate viewfinder's rect
         val dm = resources.displayMetrics
         val density = dm.density
-        //2.get screen size
         //2.get screen size
         mScreenWidth = resources.displayMetrics.widthPixels
         mScreenHeight = resources.displayMetrics.heightPixels
@@ -162,7 +160,6 @@ class QrScanActivity : AppCompatActivity() {
             }
         }
 
-
         //add remoteView to framelayout
         val params = FrameLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -177,6 +174,7 @@ class QrScanActivity : AppCompatActivity() {
 //        binding.scanningFrameView.setDrawer(PathHoleDrawer(Color.TRANSPARENT, mHoleRadius))
 //        binding.scanningFrameView.setDrawer(BitmapHoleDrawer(mBackgroundColor.toInt(), mHoleRadius))
         //set back button listener
+
         val backBtn = findViewById<ImageView>(R.id.back_img)
         backBtn.setOnClickListener { finish() }
 
@@ -185,7 +183,7 @@ class QrScanActivity : AppCompatActivity() {
         applyScannerConfig()
     }
 
-    private fun animation() {
+    private fun setUptAnimation() {
         //        binding.ani.bringToFront();
         binding.animationView.setAnimation("qrcode_scanner.json")
         //        binding.animationView.setScale(.7f);
