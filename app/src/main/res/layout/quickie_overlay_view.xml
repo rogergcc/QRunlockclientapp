@@ -7,7 +7,7 @@
     tools:parentTag="android.widget.FrameLayout">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_text_view"
+        android:id="@+id/tvMessageScannerHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
@@ -27,7 +27,7 @@
         app:drawableTopCompat="@drawable/quickie_ic_qrcode" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/close_image_view"
+        android:id="@+id/closeImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="top|start"
@@ -38,7 +38,8 @@
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/torch_image_view"
+        android:visibility="gone"
+        android:id="@+id/torchImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="top|end"
@@ -46,10 +47,11 @@
         android:background="@drawable/quickie_bg_round"
         android:padding="12dp"
         app:srcCompat="@drawable/quickie_ic_torch"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        />
 
     <LinearLayout
-        android:id="@+id/progress_view"
+        android:id="@+id/progressView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

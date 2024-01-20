@@ -45,21 +45,25 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnScan"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="sans-serif-medium"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:layout_marginTop="24dp"
+        android:padding="@dimen/activity_margin"
+
+
         android:text="@string/scan_qr_code"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/linearContainer"
+        app:layout_constraintStart_toStartOf="@+id/linearContainer"
+        app:layout_constraintTop_toBottomOf="@+id/linearContainer"
+        app:rippleColor="@color/viewBg"
+        app:strokeColor="@color/viewBg"
+        app:strokeWidth="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,37 +11,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/flash_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/app_name"
-        android:gravity="center"
-        android:src="@drawable/scankit_flash_selected_selector2"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/rim"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <!--  customize back button view -->
-    <ImageView
-        android:id="@+id/back_img"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imvActionBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:contentDescription="back"
         android:src="@drawable/back_button_layer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone" />
 
+<!--     android:src="@drawable/scankit_flash_selected_selector2"-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnFlashAction"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/quickie_bg_round"
+        android:padding="12dp"
+        app:srcCompat="@drawable/quickie_ic_torch"
+
+
+        app:layout_constraintEnd_toEndOf="@+id/holeViewCustom"
+        app:layout_constraintStart_toStartOf="@+id/holeViewCustom"
+        app:layout_constraintTop_toBottomOf="@+id/holeViewCustom" />
 
     <!-- Dark background overlay -->
     <View
@@ -53,6 +51,18 @@
     <!-- Add the scanning frame -->
 
 
+    <com.rogergcc.qrunlockclientapp.ui.helper.HoleView
+        android:id="@+id/holeViewCustom"
+        android:visibility="gone"
+        android:layout_width="300dp"
+        android:background="@color/colorAccent"
+        android:alpha="0.1"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <!-- Scanning frame -->
     <com.rogergcc.qrunlockclientapp.ui.helper.TransparentHoleView
         android:id="@+id/scanningFrameView"
@@ -61,8 +71,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:alpha="0.1"
-        android:background="#FF000000"
+        android:background="@android:color/holo_blue_bright"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +98,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/app_name"
+        />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"

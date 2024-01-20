@@ -99,7 +99,7 @@ class QROverlayView @JvmOverloads constructor(
     fun setCustomText(stringRes: Int) {
         if (stringRes != 0) {
             try {
-                binding.titleTextView.setText(stringRes)
+                binding.tvMessageScannerHint.setText(stringRes)
             } catch (ignore: NotFoundException) {
                 // string resource not found
             }
@@ -108,12 +108,12 @@ class QROverlayView @JvmOverloads constructor(
 
     fun setCustomIcon(drawableRes: Int?) {
         if (drawableRes == null) {
-            binding.titleTextView.setCompoundDrawables(null, null, null, null)
+            binding.tvMessageScannerHint.setCompoundDrawables(null, null, null, null)
         } else if (drawableRes != 0) {
             try {
                 ResourcesCompat.getDrawable(resources, drawableRes, null)?.limitDrawableSize()
                     ?.let {
-                        binding.titleTextView.setCompoundDrawables(null, it, null, null)
+                        binding.tvMessageScannerHint.setCompoundDrawables(null, it, null, null)
                     }
             } catch (ignore: NotFoundException) {
                 // drawable resource not found
@@ -169,11 +169,11 @@ class QROverlayView @JvmOverloads constructor(
         )
 
         val topInsetsToOuterFrame = (-paddingTop + centralY - strokeLength).roundToInt()
-        val titleCenter = (topInsetsToOuterFrame - binding.titleTextView.height) / 2
-        binding.titleTextView.updateTopMargin(titleCenter)
+        val titleCenter = (topInsetsToOuterFrame - binding.tvMessageScannerHint.height) / 2
+        binding.tvMessageScannerHint.updateTopMargin(titleCenter)
         // hide title text if not enough vertical space
-        binding.titleTextView.visibility =
-            if (topInsetsToOuterFrame < binding.titleTextView.height) View.INVISIBLE else View.VISIBLE
+        binding.tvMessageScannerHint.visibility =
+            if (topInsetsToOuterFrame < binding.tvMessageScannerHint.height) View.INVISIBLE else View.VISIBLE
     }
 
     private fun getAccentColor(): Int {

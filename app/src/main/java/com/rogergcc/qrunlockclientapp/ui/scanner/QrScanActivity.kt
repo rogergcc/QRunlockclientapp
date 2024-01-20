@@ -2,6 +2,8 @@ package com.rogergcc.qrunlockclientapp.ui.scanner
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.TextUtils
@@ -32,6 +34,7 @@ class QrScanActivity : AppCompatActivity() {
     private var showTorchToggle = false
     private var showCloseButton = false
     private var useFrontCamera = false
+    private var hasFlash = false
 
     private fun setupEdgeToEdgeUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -43,15 +46,12 @@ class QrScanActivity : AppCompatActivity() {
     }
 
     private fun applyScannerConfig() {
-
         binding.overlayView.setCustomText(R.string.place_the_qr_code_in_the_indicated_rectangle)
         binding.overlayView.setCustomIcon(R.drawable.quickie_ic_qrcode)
         binding.overlayView.setHorizontalFrameRatio(1.2F)
-//        binding.overlayView.setTorchState(true)
+        binding.overlayView.setTorchState(false)
 //        binding.overlayView.setCloseVisibilityAndOnClick(true) { finish() }
 
-        val hasFlash = this.packageManager
-            .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
 
 
         showTorchToggle = true
@@ -65,6 +65,7 @@ class QrScanActivity : AppCompatActivity() {
 
 
         if (showTorchToggle && hasFlash) {
+
             binding.overlayView.setTorchVisibilityAndOnClick(true) {
                 remoteView.switchLight()
                 if (remoteView.lightStatus) {
@@ -79,20 +80,19 @@ class QrScanActivity : AppCompatActivity() {
     }
 
     private fun setFlashOperation() {
-        val hasFlash = this.packageManager
-            .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
-        if (!hasFlash) {
-            binding.flashBtn.visibility = View.INVISIBLE
-        } else {
-            binding.flashBtn.visibility = View.VISIBLE
-        }
-        binding.flashBtn.setOnClickListener {
+
+
+        binding.btnFlashAction.setOnClickListener {
+            remoteView.switchLight()
             if (remoteView.lightStatus) {
-                remoteView.switchLight()
-                binding.flashBtn.setImageResource(R.drawable.scankit_flashlight_layer_off)
+//                binding.btnFlashAction.setImageResource(R.drawable.scankit_flashlight_layer_off)
+                binding.btnFlashAction.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor("#FF03DAC5"))
+
             } else {
-                remoteView.switchLight()
-                binding.flashBtn.setImageResource(R.drawable.scankit_flashlight_layer_on)
+//                binding.btnFlashAction.setImageResource(R.drawable.scankit_flashlight_layer_on)
+                binding.btnFlashAction.backgroundTintList =
+                    ColorStateList.valueOf(Color.parseColor("#f8f8f8"))
             }
         }
     }
@@ -103,7 +103,7 @@ class QrScanActivity : AppCompatActivity() {
         binding = ActivityQrScanBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
-
+        hasFlash = this.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
         //        binding.ani.bringToFront();
 
 
@@ -170,13 +170,13 @@ class QrScanActivity : AppCompatActivity() {
 
         val mBackgroundColor = 0x80000000
 
-        val mHoleRadius = 200
+        val mHoleRadius = 300
 //        binding.scanningFrameView.setDrawer(PathHoleDrawer(Color.TRANSPARENT, mHoleRadius))
 //        binding.scanningFrameView.setDrawer(BitmapHoleDrawer(mBackgroundColor.toInt(), mHoleRadius))
-        //set back button listener
 
-        val backBtn = findViewById<ImageView>(R.id.back_img)
-        backBtn.setOnClickListener { finish() }
+//        binding.holeViewCustom.setDrawer(PathHoleDrawer(Color.GREEN, mHoleRadius))
+
+        binding.imvActionBack.setOnClickListener { finish() }
 
         setFlashOperation()
 
