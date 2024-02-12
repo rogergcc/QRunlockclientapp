@@ -1,5 +1,6 @@
 package ui.attendance
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +17,8 @@ class AttendaceViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    val isLoading = MutableLiveData<Boolean>()
+    private val isLoading = MutableLiveData<Boolean>()
+
     val attendaceData = MutableLiveData<List<AttendanceDomain>>()
 
     fun onCreate(){

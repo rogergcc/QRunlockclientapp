@@ -2,7 +2,7 @@ package com.rogergcc.qrunlockclientapp.di
 
 import com.rogergcc.qrunlockclientapp.data.network.QrEventInterceptor
 import com.rogergcc.qrunlockclientapp.data.network.QrEventsApi
-import com.rogergcc.qrunlockclientapp.common.Constantes
+import com.rogergcc.qrunlockclientapp.common.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +28,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constantes.TMDBAPI_BASE_URL)
+            .baseUrl(Constants.ATTENDANCE_LOCAL_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

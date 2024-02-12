@@ -1,6 +1,6 @@
 package com.rogergcc.qrunlockclientapp.data.network
 
-import com.rogergcc.qrunlockclientapp.common.Constantes
+import com.rogergcc.qrunlockclientapp.common.Constants
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -22,8 +22,8 @@ class QrEventInterceptor : Interceptor {
 
 
             val url = originalHttpUrl.newBuilder()
-                .addQueryParameter(Constantes.URL_PARAM_API_KEY, Constantes.API_KEY)
-                .addQueryParameter(Constantes.URL_PARAM_API_LANGUAGE, "es-ES")
+                .addQueryParameter(Constants.URL_PARAM_API_KEY, Constants.API_KEY)
+                .addQueryParameter(Constants.URL_PARAM_API_LANGUAGE, "es-ES")
                 .build()
 
 

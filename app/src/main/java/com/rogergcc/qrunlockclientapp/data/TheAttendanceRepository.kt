@@ -10,7 +10,7 @@ class TheAttendanceRepository @Inject constructor(
     private val apiClient: QrEventClient
 ) {
     suspend fun getAttendanceData(): List<AttendanceDomain> {
-        val response = apiClient.verifyRegisterUserAttendace()
+        val response = apiClient.verifyRegisterUserAttendance()
         response.toString()
         return response.map { it.toDomain() }
     }
