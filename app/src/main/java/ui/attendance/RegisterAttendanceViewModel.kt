@@ -12,22 +12,26 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class AttendaceViewModel @Inject constructor(
+class RegisterAttendanceViewModel @Inject constructor(
     private val getVerifyUserRegister: GetVerifyUserRegister
 ) : ViewModel() {
 
 
-    private val isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
-    val attendaceData = MutableLiveData<List<AttendanceDomain>>()
+    private val _attendanceData = MutableLiveData<List<AttendanceDomain>>()
+    val attendanceData: LiveData<List<AttendanceDomain>> get() = _attendanceData
 
-    fun onCreate(){
+
+    fun onRegisterAttendance(){
         viewModelScope.launch {
-            isLoading.postValue(true)
+//            viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
+            _isLoading.postValue(true)
             val result = getVerifyUserRegister()
-            if(!result.isNullOrEmpty()){
-                attendaceData.postValue(result)
-                isLoading.postValue(false)
+            if(result.isNotEmpty()){
+                _attendanceData.postValue(result)
+                _isLoading.postValue(false)
             }
         }
     }
