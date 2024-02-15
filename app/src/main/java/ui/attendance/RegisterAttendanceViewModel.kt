@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rogergcc.qrunlockclientapp.domain.model.AttendanceDomain
-import com.rogergcc.qrunlockclientapp.domain.GetVerifyUserRegister
+import com.rogergcc.qrunlockclientapp.domain.VerifyUserRegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterAttendanceViewModel @Inject constructor(
-    private val getVerifyUserRegister: GetVerifyUserRegister
+    private val verifyUserRegisterUseCase: VerifyUserRegisterUseCase
 ) : ViewModel() {
 
 
@@ -21,14 +21,14 @@ class RegisterAttendanceViewModel @Inject constructor(
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     private val _attendanceData = MutableLiveData<List<AttendanceDomain>>()
-    val attendanceData: LiveData<List<AttendanceDomain>> get() = _attendanceData
+    val registerAttendanceResult: LiveData<List<AttendanceDomain>> get() = _attendanceData
 
 
     fun onRegisterAttendance(){
         viewModelScope.launch {
 //            viewModelScope.launch(viewModelScope.coroutineContext + Dispatchers.IO) {
             _isLoading.postValue(true)
-            val result = getVerifyUserRegister()
+            val result = verifyUserRegisterUseCase()
             if(result.isNotEmpty()){
                 _attendanceData.postValue(result)
                 _isLoading.postValue(false)
@@ -36,7 +36,9 @@ class RegisterAttendanceViewModel @Inject constructor(
         }
     }
 
-
+    fun registerAttendance(showResult: String?) {
+        TODO("Not yet implemented")
+    }
 
 
 }

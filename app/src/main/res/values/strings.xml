@@ -12,4 +12,5 @@
     <string name="quickie_scan_qr_code">Scan QR code</string>
     <string name="quickie_please_wait">Please wait…</string>
     <string name="place_the_qr_code_in_the_indicated_rectangle">Place the QR Code in the indicated frame</string>
+    <string name="ok">Ok</string>
 </resources>

@@ -10,21 +10,24 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.huawei.hms.ml.scan.HmsScan
 import com.rogergcc.qrunlockclientapp.BuildConfig
 import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanActivity
 import com.rogergcc.qrunlockclientapp.R
 import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
+import com.rogergcc.qrunlockclientapp.ui.extensions.snackbar
 import com.rogergcc.qrunlockclientapp.ui.helper.SoundPoolPlayer
 import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
+import ui.attendance.RegisterAttendanceViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     private var mSoundPoolPlayer: SoundPoolPlayer? = null
-
+    private val viewModel: RegisterAttendanceViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         setupUI()
+        setupViewModelObservers()
+    }
+
+    private fun setupViewModelObservers() {
+
     }
 
     private fun setupUI() {
@@ -40,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnScan.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
-                    arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE),
+                    arrayOf(Manifest.permission.CAMERA),
                     DEFINED_CODE
                 )
             }
@@ -66,8 +74,9 @@ class MainActivity : AppCompatActivity() {
                 TimberAppLogger.e("OriginalValue ${hmsScan?.originalValue} ")
                 TimberAppLogger.e("showResult ${hmsScan?.showResult} ")
                 TimberAppLogger.e("emailContent ${hmsScan?.emailContent} ")
-
-
+                snackbar( "Data=> ${hmsScan?.showResult}")
+                viewModel.registerAttendance(hmsScan?.showResult)
+                viewModel.onRegisterAttendance()
             }
         }
     }
@@ -78,9 +87,7 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.size < 2 ||
-            grantResults[0] != PackageManager.PERMISSION_GRANTED
-            || grantResults[1] != PackageManager.PERMISSION_GRANTED
+        if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED
         ) {
             return
         }
