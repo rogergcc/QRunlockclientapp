@@ -20,8 +20,10 @@ import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
 import com.rogergcc.qrunlockclientapp.ui.extensions.snackbar
 import com.rogergcc.qrunlockclientapp.ui.helper.SoundPoolPlayer
 import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
+import dagger.hilt.android.AndroidEntryPoint
 import ui.attendance.RegisterAttendanceViewModel
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -39,7 +41,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModelObservers() {
+        viewModel.registerAttendance.observe(this) { response->
 
+            Toast.makeText(this, "${response.attendance}", Toast.LENGTH_SHORT).show()
+
+        }
     }
 
     private fun setupUI() {
@@ -53,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+
     }
 
 
@@ -67,18 +74,25 @@ class MainActivity : AppCompatActivity() {
             val hmsScan: HmsScan? = data.getParcelableExtra(QrScanActivity.SCAN_RESULT)
             if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
                 mSoundPoolPlayer?.playShortResource(R.raw.bleep)
-                Toast.makeText(this, "Data=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Attendance=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
 
-                TimberAppLogger.e("ScanResult ${hmsScan?.getScanType()}")
-                TimberAppLogger.e("ScanResult ${hmsScan?.scanType}")
-                TimberAppLogger.e("OriginalValue ${hmsScan?.originalValue} ")
-                TimberAppLogger.e("showResult ${hmsScan?.showResult} ")
-                TimberAppLogger.e("emailContent ${hmsScan?.emailContent} ")
-                snackbar( "Data=> ${hmsScan?.showResult}")
-                viewModel.registerAttendance(hmsScan?.showResult)
-                viewModel.onRegisterAttendance()
+                printDetails("getScanType: ${hmsScan?.getScanType().toString()} ")
+
+                printDetails("scanType: ${hmsScan?.scanType.toString()} ")
+                printDetails("OriginalValue: ${hmsScan?.originalValue} ")
+                printDetails("showResult: ${hmsScan?.showResult} ")
+                snackbar( "Attendance=> ${hmsScan?.showResult}")
+//                viewModel.registerAttendance(hmsScan?.showResult)
+//                viewModel.onRegisterAttendance()
+
+                val scanValue = hmsScan?.originalValue?:""
+                viewModel.registerAttendance(scanValue)
             }
         }
+    }
+
+    private fun printDetails(hmsScan: String) {
+        TimberAppLogger.e("ScanResult: $hmsScan")
     }
 
     override fun onRequestPermissionsResult(

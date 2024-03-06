@@ -59,6 +59,6 @@ class QrEventInterceptor : Interceptor {
     class NoInternetException() : IOException() {
         override val message: String
             get() =
-                "No internet available, please check your connected WIFi or Data"
+                "No internet available, please check your connected WIFi or Attendance"
     }
 }
