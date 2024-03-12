@@ -12,16 +12,19 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.huawei.hms.ml.scan.HmsScan
 import com.rogergcc.qrunlockclientapp.BuildConfig
-import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanActivity
 import com.rogergcc.qrunlockclientapp.R
 import com.rogergcc.qrunlockclientapp.databinding.ActivityMainBinding
+import com.rogergcc.qrunlockclientapp.ui.attendance.RegisterAttendanceViewModel
+import com.rogergcc.qrunlockclientapp.ui.extensions.fromJson
 import com.rogergcc.qrunlockclientapp.ui.extensions.snackbar
 import com.rogergcc.qrunlockclientapp.ui.helper.SoundPoolPlayer
 import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
+import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanActivity
+import com.rogergcc.qrunlockclientapp.ui.scanner.QrScanImage
 import dagger.hilt.android.AndroidEntryPoint
-import ui.attendance.RegisterAttendanceViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -30,6 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     private var mSoundPoolPlayer: SoundPoolPlayer? = null
     private val viewModel: RegisterAttendanceViewModel by viewModels()
+
+    //    private val viewModel by viewModels<RegisterAttendanceViewModel>()
+//    private val viewModel:RegisterAttendanceViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,16 +47,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModelObservers() {
-        viewModel.registerAttendance.observe(this) { response->
 
-            Toast.makeText(this, "${response.attendance}", Toast.LENGTH_SHORT).show()
+        viewModel.error.observe(this) { error ->
+            if (error.isNotEmpty()) {
+                binding.tvError.text = error
+            }
+        }
 
+        viewModel.registerAttendance.observe(this) { response ->
+            try {
+                TimberAppLogger.e("response: $response")
+                if (response.status == 0) {
+                    Toast.makeText(this, "Error: ${response.message}", Toast.LENGTH_SHORT).show()
+                    return@observe
+                }
+            } catch (e: Exception) {
+                TimberAppLogger.e("setupViewModelObservers: ${e.message}")
+            }
+        }
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            if (isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
         }
     }
 
     private fun setupUI() {
 
-        binding.constraintParent.backgroundTintList = ColorStateList.valueOf(Color.parseColor(BuildConfig.BACKGROUND_COLOR))
+        binding.constraintParent.backgroundTintList =
+            ColorStateList.valueOf(Color.parseColor(BuildConfig.BACKGROUND_COLOR))
         binding.btnScan.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
@@ -74,25 +102,23 @@ class MainActivity : AppCompatActivity() {
             val hmsScan: HmsScan? = data.getParcelableExtra(QrScanActivity.SCAN_RESULT)
             if (!TextUtils.isEmpty(hmsScan?.getOriginalValue())) {
                 mSoundPoolPlayer?.playShortResource(R.raw.bleep)
-                Toast.makeText(this, "Attendance=> ${hmsScan?.showResult}", Toast.LENGTH_SHORT).show()
+                printDetails(hmsScan)
 
-                printDetails("getScanType: ${hmsScan?.getScanType().toString()} ")
-
-                printDetails("scanType: ${hmsScan?.scanType.toString()} ")
-                printDetails("OriginalValue: ${hmsScan?.originalValue} ")
-                printDetails("showResult: ${hmsScan?.showResult} ")
-                snackbar( "Attendance=> ${hmsScan?.showResult}")
-//                viewModel.registerAttendance(hmsScan?.showResult)
-//                viewModel.onRegisterAttendance()
-
-                val scanValue = hmsScan?.originalValue?:""
-                viewModel.registerAttendance(scanValue)
+                val scanValue = hmsScan?.originalValue ?: ""
+                val scanCode: QrScanImage = Gson().fromJson(scanValue)
+                val userId = scanCode.userId
+                viewModel.registerAttendance(userId?:"")
             }
         }
     }
 
-    private fun printDetails(hmsScan: String) {
-        TimberAppLogger.e("ScanResult: $hmsScan")
+    private fun printDetails(hmsScan: HmsScan?) {
+        TimberAppLogger.e("ScanResult: ${hmsScan?.getScanType().toString()}")
+        TimberAppLogger.e("ScanType: ${hmsScan?.scanType.toString()}")
+        TimberAppLogger.e("OriginalValue: ${hmsScan?.originalValue}")
+        TimberAppLogger.e("showResult: ${hmsScan?.showResult}")
+        snackbar("Attendance=> ${hmsScan?.showResult}")
+
     }
 
     override fun onRequestPermissionsResult(
@@ -119,6 +145,4 @@ class MainActivity : AppCompatActivity() {
         private const val DEFINED_CODE = 222
         private const val REQUEST_CODE_SCAN = 0X01
     }
-
-
 }

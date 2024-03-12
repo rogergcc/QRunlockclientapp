@@ -1,10 +1,12 @@
 package com.rogergcc.qrunlockclientapp.ui.extensions
 
 import android.app.Activity
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.TranslateAnimation
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.rogergcc.qrunlockclientapp.R
 import java.util.concurrent.atomic.AtomicBoolean
@@ -100,4 +102,8 @@ fun View.setMarginTop(marginTop: Int) {
     val menuLayoutParams = this.layoutParams as ViewGroup.MarginLayoutParams
     menuLayoutParams.setMargins(0, marginTop, 0, 0)
     this.layoutParams = menuLayoutParams
+}
+
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_12">12dp</dimen>

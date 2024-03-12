@@ -1,4 +1,4 @@
-package com.rogergcc.qrunlockclientapp.domain.model
+package com.rogergcc.qrunlockclientapp.domain.attendance
 
 import android.os.Parcelable
 import com.rogergcc.qrunlockclientapp.data.model.AttedancesRows
@@ -7,7 +7,7 @@ import com.rogergcc.qrunlockclientapp.data.model.AttedancesRows
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AttendanceDomain (
+data class AttendanceEntity (
         val id: Int?,
         val chatId: String?,
         val eventId: Int?,
@@ -15,7 +15,7 @@ data class AttendanceDomain (
         val updatedAt: String?
         ):Parcelable
 
-fun AttedancesRows.toDomain() = AttendanceDomain(
+fun AttedancesRows.toDomain() = AttendanceEntity(
         id,
         chatId,
         eventId,
