@@ -1,5 +1,6 @@
 package com.rogergcc.qrunlockclientapp.data.network
 
+import com.rogergcc.qrunlockclientapp.common.Resource
 import retrofit2.HttpException
 
 

@@ -2,11 +2,11 @@ package com.rogergcc.qrunlockclientapp.data
 
 
 import com.rogergcc.qrunlockclientapp.data.network.QrEventClient
-import com.rogergcc.qrunlockclientapp.data.response.RegisterAttendanceResponse
-import com.rogergcc.qrunlockclientapp.domain.attendance.AttendanceEntity
-import com.rogergcc.qrunlockclientapp.domain.attendance.IEventAttendanceRepository
-import com.rogergcc.qrunlockclientapp.domain.attendance.toDomain
-import com.rogergcc.qrunlockclientapp.ui.helper.TimberAppLogger
+import com.rogergcc.qrunlockclientapp.data.network.response.RegisterAttendanceResponse
+import com.rogergcc.qrunlockclientapp.domain.model.AttendanceEntity
+import com.rogergcc.qrunlockclientapp.domain.repository.IEventAttendanceRepository
+import com.rogergcc.qrunlockclientapp.domain.model.toDomain
+import com.rogergcc.qrunlockclientapp.presentation.helper.TimberAppLogger
 import javax.inject.Inject
 
 class EventAttendanceRepositoryImpl @Inject constructor(

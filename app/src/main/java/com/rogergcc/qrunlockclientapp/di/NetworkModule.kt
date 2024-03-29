@@ -7,7 +7,7 @@ import com.rogergcc.qrunlockclientapp.data.EventAttendanceRepositoryImpl
 import com.rogergcc.qrunlockclientapp.data.network.QrEventClient
 import com.rogergcc.qrunlockclientapp.data.network.QrEventInterceptor
 import com.rogergcc.qrunlockclientapp.data.network.QrEventsApi
-import com.rogergcc.qrunlockclientapp.domain.attendance.IEventAttendanceRepository
+import com.rogergcc.qrunlockclientapp.domain.repository.IEventAttendanceRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
