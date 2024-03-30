@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">QRunlockclientapp</string>
     <string name="scan_the_qr_code">Scan the QR code of event assistant  in order to enter the event</string>
-    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scan_qr_code">Verify Attendance</string>
     <string name="msg_no_ticket_found">No ticket found. Please go to https://t.me/QRUnlockBot</string>
     <string name="lbl_date">Date</string>
     <string name="lbl_time_start">Time start</string>

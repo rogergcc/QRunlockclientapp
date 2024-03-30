@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.scanner.QrScanActivity">
+    tools:context=".presentation.scanner.QrScanActivity">
     <!-- customize layout needed by scankit for camera preview -->
     <FrameLayout
         android:id="@+id/rim"
@@ -51,7 +51,7 @@
     <!-- Add the scanning frame -->
 
 
-    <com.rogergcc.qrunlockclientapp.ui.helper.HoleView
+    <com.rogergcc.qrunlockclientapp.presentation.helper.HoleView
         android:id="@+id/holeViewCustom"
         android:visibility="gone"
         android:layout_width="300dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
     <!-- Scanning frame -->
-    <com.rogergcc.qrunlockclientapp.ui.helper.TransparentHoleView
+    <com.rogergcc.qrunlockclientapp.presentation.helper.TransparentHoleView
         android:id="@+id/scanningFrameView"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Add the scanning line -->
-    <com.rogergcc.qrunlockclientapp.ui.helper.QROverlayView
+    <com.rogergcc.qrunlockclientapp.presentation.helper.QROverlayView
         android:id="@+id/overlayView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

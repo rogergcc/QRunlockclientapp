@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.main.MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearContainer"
@@ -66,21 +66,22 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnScan"
 
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
 
+        android:layout_marginBottom="16dp"
         android:padding="@dimen/activity_margin"
         android:text="@string/scan_qr_code"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/viewBg"
         app:strokeColor="@color/viewBg"
+        app:cornerRadius="@dimen/dimen_8"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:strokeWidth="2dp" />
 
 
